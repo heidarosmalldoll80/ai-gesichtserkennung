@@ -1,4 +1,8 @@
+# List of required packages for the project
 Flask==2.0.1
+# WSGI server
 gunicorn==20.1.0
+# Computer vision library
 opencv-python==4.5.3.20210927
+# Machine learning library
 tensorflow==2.6.0
