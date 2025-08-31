@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        file = request.files['image']
+        file = request.files.get('image')  # Use get to avoid KeyError
         if file:
             # Save the image to the uploads directory
             img_path = './uploads/' + file.filename
@@ -16,6 +16,8 @@ def index():
             # Call face detection on the uploaded image
             face_detection(img_path)
             return redirect(url_for('results', filename=file.filename))
+        else:
+            return render_template('index.html', error='No file uploaded.')  # Handle case of no file uploaded
     return render_template('index.html')
 
 @app.route('/results/<filename>')
